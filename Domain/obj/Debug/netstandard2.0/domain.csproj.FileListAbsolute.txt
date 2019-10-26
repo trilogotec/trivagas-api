@@ -1,0 +1,9 @@
+/Users/hugoramossoares/Sites/trivagas-api/domain/bin/Debug/netstandard2.0/domain.deps.json
+/Users/hugoramossoares/Sites/trivagas-api/Domain/bin/Debug/netstandard2.0/domain.dll
+/Users/hugoramossoares/Sites/trivagas-api/Domain/bin/Debug/netstandard2.0/domain.pdb
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.csprojAssemblyReference.cache
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.csproj.CoreCompileInputs.cache
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.AssemblyInfoInputs.cache
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.AssemblyInfo.cs
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.dll
+/Users/hugoramossoares/Sites/trivagas-api/Domain/obj/Debug/netstandard2.0/domain.pdb
