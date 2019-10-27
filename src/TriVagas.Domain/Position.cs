@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Domain
+namespace TriVagas.Domain
 {
-    public class Skill : BaseEntity
+    public class Position : BaseEntity
     {
         public string Name { get; set; }
     }

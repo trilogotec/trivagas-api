@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Domain.Enum;
+using TriVagas.Domain.Enum;
 
-namespace Domain
+namespace TriVagas.Domain
 {
     public class Opportunity : BaseEntity
     {

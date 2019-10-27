@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Enum
+namespace TriVagas.Domain.Enum
 {
     public enum EJobType
     {

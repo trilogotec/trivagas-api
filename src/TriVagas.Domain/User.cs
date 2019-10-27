@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain
+namespace TriVagas.Domain
 {
     public class User : BaseEntity
     {
