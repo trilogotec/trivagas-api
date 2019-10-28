@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.Domain", "src\TriVagas.Domain\TriVagas.Domain.csproj", "{1A07AF09-A7CD-4FB1-B325-D2D5065E4722}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FF78A2C-DAF8-4C7E-90A6-2FAFFF134B93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.Infra.Data", "src\TriVagas.Infra.Data\TriVagas.Infra.Data.csproj", "{E669C7C5-85CA-4080-8B5A-849436C92348}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,17 @@ Global
 		{1A07AF09-A7CD-4FB1-B325-D2D5065E4722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A07AF09-A7CD-4FB1-B325-D2D5065E4722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A07AF09-A7CD-4FB1-B325-D2D5065E4722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E669C7C5-85CA-4080-8B5A-849436C92348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E669C7C5-85CA-4080-8B5A-849436C92348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E669C7C5-85CA-4080-8B5A-849436C92348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E669C7C5-85CA-4080-8B5A-849436C92348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A07AF09-A7CD-4FB1-B325-D2D5065E4722} = {7FF78A2C-DAF8-4C7E-90A6-2FAFFF134B93}
+		{E669C7C5-85CA-4080-8B5A-849436C92348} = {7FF78A2C-DAF8-4C7E-90A6-2FAFFF134B93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1E49E29-02A7-43F5-AE5F-B385AE2C0ED9}
