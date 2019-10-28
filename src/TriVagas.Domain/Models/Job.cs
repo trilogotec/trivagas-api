@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TriVagas.Domain
+namespace TriVagas.Domain.Models
 {
     public class Job : BaseEntity
     {
@@ -11,5 +11,8 @@ namespace TriVagas.Domain
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Description { get; set; }
+
+        public Opportunity Opportunity { get; private set; }
+        public int OpportunityId { get; private set; }
     }
 }

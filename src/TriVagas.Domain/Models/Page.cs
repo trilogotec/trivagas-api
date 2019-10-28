@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TriVagas.Domain
+namespace TriVagas.Domain.Models
 {
     public class Page : BaseEntity
     {
