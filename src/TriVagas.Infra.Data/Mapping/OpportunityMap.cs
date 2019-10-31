@@ -8,7 +8,7 @@ namespace TriVagas.Infra.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Opportunity> builder)
         {
-            builder.ToTable("Opportunity");
+            builder.ToTable("Opportunities");
 
             builder.HasKey(o => o.Id);           
 
@@ -23,6 +23,16 @@ namespace TriVagas.Infra.Data.Mapping
             builder.HasOne(o => o.Job)
                    .WithOne(j => j.Opportunity)
                    .HasForeignKey<Job>(j => j.OpportunityId);
+
+            builder.HasOne(o => o.CreatedBy)
+                   .WithMany()
+                   .HasForeignKey(o => o.CreatedById)
+                   .IsRequired();
+            
+            builder.HasOne(o => o.LastUpdateBy)
+                   .WithMany()
+                   .HasForeignKey(o => o.LastUpdateById)
+                   .IsRequired();
         }
     }
 }
