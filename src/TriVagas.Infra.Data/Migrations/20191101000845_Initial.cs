@@ -20,7 +20,7 @@ namespace TriVagas.Infra.Data.Migrations
                     CreatedById = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    ProfileId = table.Column<int>(nullable: false)
+                    ProfileId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,8 +49,7 @@ namespace TriVagas.Infra.Data.Migrations
                     LastUpdateById = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     CreatedById = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,12 +66,6 @@ namespace TriVagas.Infra.Data.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Classes_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,8 +78,7 @@ namespace TriVagas.Infra.Data.Migrations
                     LastUpdateById = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     CreatedById = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,12 +95,6 @@ namespace TriVagas.Infra.Data.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Positions_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,8 +107,7 @@ namespace TriVagas.Infra.Data.Migrations
                     LastUpdateById = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     CreatedById = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -139,12 +124,6 @@ namespace TriVagas.Infra.Data.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_States_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,8 +137,7 @@ namespace TriVagas.Infra.Data.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     CreatedById = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    StateId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    StateId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,12 +158,6 @@ namespace TriVagas.Infra.Data.Migrations
                         name: "FK_Cities_States_StateId",
                         column: x => x.StateId,
                         principalTable: "States",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Cities_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -402,8 +374,7 @@ namespace TriVagas.Infra.Data.Migrations
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    OpportunityId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    OpportunityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -444,12 +415,6 @@ namespace TriVagas.Infra.Data.Migrations
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Jobs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -570,11 +535,6 @@ namespace TriVagas.Infra.Data.Migrations
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_UserId",
-                table: "Cities",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Classes_CreatedById",
                 table: "Classes",
                 column: "CreatedById");
@@ -583,11 +543,6 @@ namespace TriVagas.Infra.Data.Migrations
                 name: "IX_Classes_LastUpdateById",
                 table: "Classes",
                 column: "LastUpdateById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Classes_UserId",
-                table: "Classes",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_CityId",
@@ -639,11 +594,6 @@ namespace TriVagas.Infra.Data.Migrations
                 name: "IX_Jobs_ProfileId",
                 table: "Jobs",
                 column: "ProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Jobs_UserId",
-                table: "Jobs",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_CreatedById",
@@ -711,11 +661,6 @@ namespace TriVagas.Infra.Data.Migrations
                 column: "LastUpdateById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Positions_UserId",
-                table: "Positions",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Profiles_CityId",
                 table: "Profiles",
                 column: "CityId");
@@ -772,11 +717,6 @@ namespace TriVagas.Infra.Data.Migrations
                 name: "IX_States_LastUpdateById",
                 table: "States",
                 column: "LastUpdateById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_States_UserId",
-                table: "States",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CreatedById",

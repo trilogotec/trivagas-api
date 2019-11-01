@@ -8,11 +8,11 @@ namespace TriVagas.Infra.Data.Context
 {
     public class DataContext : DbContext
     {
-        private readonly IConfiguration _configuration;
+        private readonly IHostEnvironment _env;
 
-        public DataContext(IConfiguration configuration)
+        public DataContext(IHostEnvironment env)
         {
-            _configuration = configuration;
+            _env = env;
         }
 
         public DbSet<Opportunity> Opportunities { get; set; }
@@ -30,12 +30,12 @@ namespace TriVagas.Infra.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // var config = new ConfigurationBuilder()
-            //     .SetBasePath(_env.ContentRootPath)
-            //     .AddJsonFile("appsettings.json")
-            //     .Build();
+            var config = new ConfigurationBuilder()
+                .SetBasePath(_env.ContentRootPath)
+                .AddJsonFile($"appsettings.{_env.EnvironmentName}.json")
+                .Build();
 
-            optionsBuilder.UseMySql(_configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseMySql(config.GetConnectionString("DefaultConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

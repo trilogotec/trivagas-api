@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TriVagas.Domain.Interfaces;
 using TriVagas.Infra.Data.Context;
+using TriVagas.Infra.Data.Repository;
+using TriVagas.Services.Interfaces;
+using TriVagas.Services.Services;
 
 namespace TriVagas.Application
 {
@@ -28,6 +32,12 @@ namespace TriVagas.Application
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
+
+            // Application
+            services.AddScoped<IOpportunityService, OpportunityService>();
+
+            // Infra.Data
+            services.AddScoped<IOpportunityRepository, OpportunityRepository>();
             services.AddScoped<DataContext, DataContext>();
 
             services.AddControllers();

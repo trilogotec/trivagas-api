@@ -43,9 +43,6 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<int?>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
@@ -53,8 +50,6 @@ namespace TriVagas.Infra.Data.Migrations
                     b.HasIndex("LastUpdateById");
 
                     b.HasIndex("StateId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Cities");
                 });
@@ -82,16 +77,11 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("LastUpdateById");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Classes");
                 });
@@ -192,9 +182,6 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
@@ -209,8 +196,6 @@ namespace TriVagas.Infra.Data.Migrations
                     b.HasIndex("PositionId");
 
                     b.HasIndex("ProfileId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Jobs");
                 });
@@ -375,16 +360,11 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("LastUpdateById");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Positions");
                 });
@@ -513,16 +493,11 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("LastUpdateById");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("States");
                 });
@@ -551,7 +526,7 @@ namespace TriVagas.Infra.Data.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ProfileId")
+                    b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -580,10 +555,6 @@ namespace TriVagas.Infra.Data.Migrations
                     b.HasOne("TriVagas.Domain.Models.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId");
-
-                    b.HasOne("TriVagas.Domain.Models.User", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TriVagas.Domain.Models.Class", b =>
@@ -599,10 +570,6 @@ namespace TriVagas.Infra.Data.Migrations
                         .HasForeignKey("LastUpdateById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TriVagas.Domain.Models.User", null)
-                        .WithMany("Classes")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TriVagas.Domain.Models.Company", b =>
@@ -676,10 +643,6 @@ namespace TriVagas.Infra.Data.Migrations
                         .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TriVagas.Domain.Models.User", null)
-                        .WithMany("Jobs")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TriVagas.Domain.Models.Like", b =>
@@ -777,10 +740,6 @@ namespace TriVagas.Infra.Data.Migrations
                         .HasForeignKey("LastUpdateById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TriVagas.Domain.Models.User", null)
-                        .WithMany("Positions")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TriVagas.Domain.Models.Profile", b =>
@@ -850,10 +809,6 @@ namespace TriVagas.Infra.Data.Migrations
                         .HasForeignKey("LastUpdateById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TriVagas.Domain.Models.User", null)
-                        .WithMany("States")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TriVagas.Domain.Models.User", b =>

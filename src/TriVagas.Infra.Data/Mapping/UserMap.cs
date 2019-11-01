@@ -15,6 +15,8 @@ namespace TriVagas.Infra.Data.Mapping
             builder.Property(u => u.LastUpdateById).IsRequired(false);
             builder.Property(u => u.CreatedById).IsRequired(false);
 
+            builder.Property(u => u.ProfileId).IsRequired(false);
+
             builder.HasOne(u => u.CreatedBy)
                    .WithMany()
                    .HasForeignKey(u => u.CreatedById)
