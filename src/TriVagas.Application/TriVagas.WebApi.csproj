@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AssemblyName>TriVagas.WebApi</AssemblyName>
+    <RootNamespace>TriVagas.WebApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

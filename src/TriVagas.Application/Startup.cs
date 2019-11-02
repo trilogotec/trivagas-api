@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using TriVagas.Domain.Interfaces;
 using TriVagas.Infra.Data.Context;
 using TriVagas.Infra.Data.Repository;
@@ -34,7 +35,7 @@ namespace TriVagas.Application
 
 
             // Application
-            services.AddScoped<IOpportunityService, OpportunityService>();
+            services.AddScoped<IServiceProvider, ServiceProvider>();
 
             // Infra.Data
             services.AddScoped<IOpportunityRepository, OpportunityRepository>();
