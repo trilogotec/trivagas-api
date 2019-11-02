@@ -1,6 +1,6 @@
-namespace TriVagas.Application.Models
+namespace TriVagas.Services.Requests
 {
-    public class User
+    public class UserRegisterRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }

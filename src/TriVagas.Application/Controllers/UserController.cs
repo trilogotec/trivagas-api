@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using TriVagas.Application.Models;
+using TriVagas.Services.Requests;
 
 namespace TriVagas.Application.Controllers
 {
@@ -12,14 +10,14 @@ namespace TriVagas.Application.Controllers
     {
         [HttpPost]
         [Route("login")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] UserLoginRequest user)
         {
             return Ok(user);
         }
 
         [HttpPost]
         [Route("register")]
-        public IActionResult Register([FromBody] User user)
+        public IActionResult Register([FromBody] UserRegisterRequest user)
         {
             return Ok(user);
         }
