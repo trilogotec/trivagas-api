@@ -11,13 +11,6 @@ namespace TriVagas.Application.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IOpportunityService _opportunityService;
-
-        public UserController(IServiceProvider serviceProvider)
-        {
-            _opportunityService = serviceProvider.GetRequiredService<IOpportunityService>();
-        }
-
         [HttpPost]
         [Route("login")]
         public IActionResult Login([FromBody] UserLoginRequest user)

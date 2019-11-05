@@ -34,12 +34,15 @@ namespace TriVagas.Application
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
 
-            // Application
-            services.AddScoped<IServiceProvider, ServiceProvider>();
+            // WebApi
+            // services.AddScoped<IServiceProvider, ServiceProvider>();
 
             // Infra.Data
             services.AddScoped<IOpportunityRepository, OpportunityRepository>();
             services.AddScoped<DataContext, DataContext>();
+            
+            // Services
+            services.AddScoped<IOpportunityService, OpportunityService>();
 
             services.AddControllers();
         }

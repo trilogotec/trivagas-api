@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FF78A2C-DAF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.Infra.Data", "src\TriVagas.Infra.Data\TriVagas.Infra.Data.csproj", "{E669C7C5-85CA-4080-8B5A-849436C92348}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.WebApi", "src\TriVagas.Application\TriVagas.WebApi.csproj", "{6C74C7A5-B8E5-465A-8B42-C6EADDC3BDD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.WebApi", "src\TriVagas.WebApi\TriVagas.WebApi.csproj", "{6C74C7A5-B8E5-465A-8B42-C6EADDC3BDD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TriVagas.Services", "src\TriVagas.Services\TriVagas.Services.csproj", "{91071BCF-5E35-44D7-8CFA-6908F04BBFD2}"
 EndProject
