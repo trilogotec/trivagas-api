@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/TriVagas.Application/TriVagas.Application.csproj",
+                "${workspaceFolder}/src/TriVagas.WebApi/TriVagas.WebApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/TriVagas.Application/TriVagas.Application.csproj",
+                "${workspaceFolder}/src/TriVagas.WebApi/TriVagas.WebApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/src/TriVagas.Application/TriVagas.Application.csproj",
+                "${workspaceFolder}/src/TriVagas.WebApi/TriVagas.WebApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

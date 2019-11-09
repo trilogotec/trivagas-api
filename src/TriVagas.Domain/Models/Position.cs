@@ -16,8 +16,8 @@ namespace TriVagas.Domain.Models
 
         // Empty constructor for EF.
         protected Position() { }
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
-        public List<Job> Jobs { get; set; }
+        public List<Job> Jobs { get; protected set; }
     }
 }

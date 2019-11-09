@@ -15,7 +15,7 @@ namespace TriVagas.Domain.Models
         // Empty constructor for EF.
         protected Like() { }
 
-        public int OpportunityId { get; private set; }
-        public Opportunity Opportunity { get; private set; }
+        public int OpportunityId { get; protected set; }
+        public Opportunity Opportunity { get; protected set; }
     }
 }

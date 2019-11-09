@@ -25,18 +25,18 @@ namespace TriVagas.Domain.Models
         // Empty constructor for EF.
         protected Job() { }
         
-        public Profile Profile { get; set; }
-        public int ProfileId { get; set; }
-        public Company Company { get; set; }
-        public int CompanyId { get; set; }
-        public Position Position { get; set; }
-        public int PositionId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public string Description { get; set; }
+        public Profile Profile { get; protected set; }
+        public int ProfileId { get; protected set; }
+        public Company Company { get; protected set; }
+        public int CompanyId { get; protected set; }
+        public Position Position { get; protected set; }
+        public int PositionId { get; protected set; }
+        public DateTime StartDate { get; protected set; }
+        public DateTime? EndDate { get; protected set; }
+        public string Description { get; protected set; }
 
         
-        public Opportunity Opportunity { get; private set; }
-        public int OpportunityId { get; private set; }
+        public Opportunity Opportunity { get; protected set; }
+        public int OpportunityId { get; protected set; }
     }
 }
