@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TriVagas.Services.Notify;
 
 namespace TriVagas.Services.Services
@@ -16,7 +17,7 @@ namespace TriVagas.Services.Services
             _notify.Add(new Notification(message));
         }
 
-        protected bool HasNotification() 
+        protected  bool HasNotification() 
         {
             return _notify.Any();
         }

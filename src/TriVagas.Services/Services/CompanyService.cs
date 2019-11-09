@@ -1,4 +1,5 @@
-﻿using TriVagas.Domain.Interfaces;
+﻿using System.Threading.Tasks;
+using TriVagas.Domain.Interfaces;
 using TriVagas.Domain.Models;
 using TriVagas.Services.Interfaces;
 using TriVagas.Services.Notify;
@@ -20,12 +21,12 @@ namespace TriVagas.Services.Services
             _companyRepository = companyRepository;
         }
 
-        public Company CreateCompany(CreatePageRequest request,User user) 
+        public async Task<Company> CreateCompany(CreatePageRequest request,User user) 
         {
             if (user == null) 
                 Notify("User not found");
 
-            var city = _cityRepository.GetById(request.CityId);
+            var city = await _cityRepository.GetById(request.CityId);
 
             if (city == null)
                 Notify("City not found");
@@ -34,9 +35,9 @@ namespace TriVagas.Services.Services
             if (!HasNotification())
             {
                 var newCompany = new Company(request.Name, city, request.LinkedIn, user);
-                _companyRepository.Add(newCompany);
+                await _companyRepository.Add(newCompany);
 
-                return _companyRepository.GetById(newCompany.Id);
+                return await _companyRepository.GetById(newCompany.Id);
             }
             else
                 return null;

@@ -37,17 +37,17 @@ namespace TriVagas.Domain.Models
 
         // Empty constructor for EF.
         protected Opportunity(){}
-        public Company Company { get; private set; }
-        public int CompanyId { get; private set; }
-        public Class Class { get; private set; }
-        public int ClassId { get; private set; }
-        public List<Skill> Skills { get; private set; }
-        public string Description { get; private set; }
-        public EJobType JobType { get; private set; }
-        public decimal? SalaryMin { get; private set; }
-        public decimal? SalaryMax { get; private set; }
-        public bool Active { get; private set; }
-        public Job Job { get; private set; }
-        public List<Like> Likes { get; private set; }
+        public Company Company { get; protected set; }
+        public int CompanyId { get; protected set; }
+        public Class Class { get; protected set; }
+        public int ClassId { get; protected set; }
+        public List<Skill> Skills { get; protected set; }
+        public string Description { get; protected set; }
+        public EJobType JobType { get; protected set; }
+        public decimal? SalaryMin { get; protected set; }
+        public decimal? SalaryMax { get; protected set; }
+        public bool Active { get; protected set; }
+        public Job Job { get; protected set; }
+        public List<Like> Likes { get; protected set; }
     }
 }

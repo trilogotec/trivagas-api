@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TriVagas.Application.Controllers;
+using System.Threading.Tasks;
 using TriVagas.Services.Interfaces;
 using TriVagas.Services.Notify;
 using TriVagas.Services.Requests;
@@ -33,14 +33,14 @@ namespace TriVagas.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
-        public IActionResult CreatePage(CreatePageRequest request)
+        public async Task<IActionResult> CreatePage(CreatePageRequest request)
         {
-            var user = _userService.GetById(request.UserId);
+            var user = await _userService.GetById(request.UserId);
 
-            var newCompany = _companyService.CreateCompany(request, user);
+            var newCompany = await _companyService.CreateCompany(request, user);
 
             if (newCompany != null) 
-                _pageService.CreatePage(newCompany, user);
+                await _pageService.CreatePage(newCompany, user);
 
             return Response(code:201);
         }

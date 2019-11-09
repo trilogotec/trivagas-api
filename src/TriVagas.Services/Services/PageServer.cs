@@ -1,4 +1,5 @@
-﻿using TriVagas.Domain.Interfaces;
+﻿using System.Threading.Tasks;
+using TriVagas.Domain.Interfaces;
 using TriVagas.Domain.Models;
 using TriVagas.Services.Interfaces;
 using TriVagas.Services.Notify;
@@ -18,23 +19,17 @@ namespace TriVagas.Services.Services
             _pageOwnerRepository = pageOwnerRepository;
         }
 
-        public Page CreatePage(Company company,User user) 
+        public async Task<Page> CreatePage(Company company,User user) 
         {
             var page = new Page(company, user);
 
-            _pageRepository.Add(page);
+            await _pageRepository.Add(page);
 
-            var newPageOwner = new PageUser 
-            {
-                PageId = page.Id,
-                Page = page,
-                OwnerId = page.CreatedBy.Id,
-                Owner = page.CreatedBy
-            };
+            var newPageOwner = new PageUser(page, user);
 
-            _pageOwnerRepository.Add(newPageOwner);
+            await _pageOwnerRepository.Add(newPageOwner);
 
-            return _pageRepository.GetById(page.Id);
+            return await _pageRepository.GetById(page.Id);
         }
     }
 }

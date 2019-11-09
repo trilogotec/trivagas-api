@@ -17,7 +17,7 @@ namespace TriVagas.Domain.Models
         // Empty constructor for EF.
         protected Page() { }
 
-        public Company Company { get; set; }
-        public List<PageUser> PageOwners { get; private set; }
+        public Company Company { get; protected set; }
+        public List<PageUser> PageOwners { get; protected set; }
     }
 }

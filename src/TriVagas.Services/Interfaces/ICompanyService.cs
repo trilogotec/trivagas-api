@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TriVagas.Domain.Models;
 using TriVagas.Services.Requests;
 
@@ -6,6 +7,6 @@ namespace TriVagas.Services.Interfaces
 {
     public interface ICompanyService : IDisposable
     {
-        Company CreateCompany(CreatePageRequest request, User user);
+        Task<Company> CreateCompany(CreatePageRequest request, User user);
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TriVagas.Services.Notify;
 
-namespace TriVagas.Application.Controllers
+namespace TriVagas.WebApi.Controllers
 {
     public abstract class ApiController : ControllerBase
     {

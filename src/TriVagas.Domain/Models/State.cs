@@ -15,6 +15,6 @@ namespace TriVagas.Domain.Models
         
         // Empty constructor for EF.
         protected State(){}
-        public string Name { get; set; }
+        public string Name { get; protected set; }
     }
 }

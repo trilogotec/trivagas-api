@@ -31,16 +31,16 @@ namespace TriVagas.Domain.Models
 
         // Empty constructor for EF.
         protected Profile(){}
-        public string Name { get; set; }
-        public City City { get; set; }
-        public Class Class { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Job> Experience { get; set; }
-        public string GitHub { get; set; }
-        public string LinkedIn { get; set; }
-        public int Contribution { get; set; }
+        public string Name { get; protected set; }
+        public City City { get; protected set; }
+        public Class Class { get; protected set; }
+        public List<Skill> Skills { get; protected set; }
+        public List<Job> Experience { get; protected set; }
+        public string GitHub { get; protected set; }
+        public string LinkedIn { get; protected set; }
+        public int Contribution { get; protected set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int UserId { get; protected set; }
+        public User User { get; protected set; }
     }
 }

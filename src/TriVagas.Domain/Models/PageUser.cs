@@ -2,10 +2,17 @@ namespace TriVagas.Domain.Models
 {
     public class PageUser
     {
-        public int PageId { get; set; }
-        public Page Page { get; set; }
+        public PageUser(Page page, User owner)
+        {
+            Page = page;
+            Owner = owner;
+        }
 
-        public int OwnerId { get; set; }
-        public User Owner { get; set; }
+        protected PageUser() { }
+        public int PageId { get; protected set; }
+        public Page Page { get; protected set; }
+
+        public int OwnerId { get; protected set; }
+        public User Owner { get; protected set; }
     }
 }

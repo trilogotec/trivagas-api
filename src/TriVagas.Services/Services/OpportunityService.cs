@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TriVagas.Domain.Interfaces;
 using TriVagas.Domain.Models;
 using TriVagas.Services.Interfaces;
@@ -15,28 +16,28 @@ namespace TriVagas.Services.Services
             _opportunityRepository = opportunityRepository;
         }
 
-        public IEnumerable<Opportunity> GetAll()
+        public async Task<List<Opportunity>> GetAll()
         {
-            return _opportunityRepository.GetAll();
+            return await _opportunityRepository.GetAll();
         }
 
-        public Opportunity GetById(int id)
+        public async Task<Opportunity> GetById(int id)
         {
-            return _opportunityRepository.GetById(id);
+            return await _opportunityRepository.GetById(id);
         }
 
-        public void Register(Opportunity obj)
+        public async Task<Opportunity> Register(Opportunity obj)
         {
-            _opportunityRepository.Add(obj);
+            return await _opportunityRepository.Add(obj);
         }
-        public void Update(Opportunity obj)
+        public async Task<Opportunity> Update(Opportunity obj)
         {
-            _opportunityRepository.Update(obj);
+            return await _opportunityRepository.Update(obj);
         }
 
-        public void Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            _opportunityRepository.Remove(id);
+            return await _opportunityRepository.Remove(id);
         }
 
         public void Dispose()
