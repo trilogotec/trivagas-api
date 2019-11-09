@@ -4,10 +4,6 @@
     <ProjectReference Include="..\TriVagas.Infra.Data\TriVagas.Infra.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Requests\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
