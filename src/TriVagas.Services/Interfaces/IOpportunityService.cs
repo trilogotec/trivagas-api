@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TriVagas.Domain.Models;
 
 namespace TriVagas.Services.Interfaces
 {
     public interface IOpportunityService : IDisposable
     {
-        IEnumerable<Opportunity> GetAll();
-        Opportunity GetById(int id);
-        void Register(Opportunity opportunity);
-        void Update(Opportunity opportunity);
-        void Remove(int id);
+        Task<List<Opportunity>> GetAll();
+        Task<Opportunity> GetById(int id);
+        Task<Opportunity> Register(Opportunity opportunity);
+        Task<Opportunity> Update(Opportunity opportunity);
+        Task<bool> Remove(int id);
     }
 }

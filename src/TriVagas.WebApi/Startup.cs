@@ -1,17 +1,20 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 using TriVagas.Domain.Interfaces;
 using TriVagas.Infra.Data.Context;
 using TriVagas.Infra.Data.Repository;
 using TriVagas.Services.Interfaces;
 using TriVagas.Services.Services;
 
-namespace TriVagas.Application
+namespace TriVagas.WebApi
 {
     public class Startup
     {
@@ -37,12 +40,33 @@ namespace TriVagas.Application
             // WebApi
             // services.AddScoped<IServiceProvider, ServiceProvider>();
 
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings").GetChildren().ToString());
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+            ).AddJwtBearer(x => 
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             // Infra.Data
             services.AddScoped<IOpportunityRepository, OpportunityRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<DataContext, DataContext>();
-            
+
             // Services
             services.AddScoped<IOpportunityService, OpportunityService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddControllers();
         }
@@ -63,6 +87,7 @@ namespace TriVagas.Application
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

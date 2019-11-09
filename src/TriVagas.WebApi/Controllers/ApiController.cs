@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace TriVagas.Application.Controllers
+namespace TriVagas.WebApi.Controllers
 {
     public abstract class ApiController : ControllerBase
     {

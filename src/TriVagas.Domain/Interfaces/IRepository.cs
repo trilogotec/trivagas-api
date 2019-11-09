@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace TriVagas.Domain.Interfaces
 {
 	public interface IRepository<TEntity> : IDisposable where TEntity : class
 	{
-		void Add(TEntity obj);
-		TEntity GetById(int id);
-        IQueryable<TEntity> GetAll();
-        void Update(TEntity obj);
-        void Remove(int id);
+        Task<List<TEntity>> GetAll();
+		Task<TEntity> GetById(int id);
+		Task<TEntity> Add(TEntity obj);
+        Task<TEntity> Update(TEntity obj);
+        Task<bool> Remove(int id);
 	}
 }

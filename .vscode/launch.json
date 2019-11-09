@@ -10,20 +10,20 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/TriVagas.Application/bin/Debug/netcoreapp3.0/TriVagas.Application.dll",
+            "program": "${workspaceFolder}/src/TriVagas.WebApi/bin/Debug/netcoreapp3.0/TriVagas.WebApi.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/TriVagas.Application",
+            "cwd": "${workspaceFolder}/src/TriVagas.WebApi",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
-            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
+            },
+            "logging":
+            {
+                "moduleLoad": false, 
             }
         },
         {

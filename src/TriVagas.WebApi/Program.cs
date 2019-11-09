@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace TriVagas.Application
+namespace TriVagas.WebApi
 {
     public class Program
     {

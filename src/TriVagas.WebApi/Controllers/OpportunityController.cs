@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using TriVagas.Services.Interfaces;
 
-namespace TriVagas.Application.Controllers
+namespace TriVagas.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/")]

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TriVagas.Domain.Interfaces;
 using TriVagas.Infra.Data.Context;
@@ -17,32 +19,37 @@ namespace TriVagas.Infra.Data.Repository
             DbSet = Db.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
-            return DbSet;
+            return await DbSet.AsNoTracking().ToListAsync();
         }
 
-        public TEntity GetById(int id)
+        public virtual async Task<TEntity> GetById(int id)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
-        public void Add(TEntity obj)
+        public virtual async Task<TEntity> Add(TEntity obj)
         {
-            DbSet.Add(obj);
-            Db.SaveChanges();
+            await DbSet.AddAsync(obj);
+            await Db.SaveChangesAsync();
+            return obj;
         }
 
-        public void Update(TEntity obj)
+        public virtual async Task<TEntity> Update(TEntity obj)
         {
             DbSet.Update(obj);
-            Db.SaveChanges();
+            await Db.SaveChangesAsync();
+            return obj;
         }
 
-        public void Remove(int id)
+        public virtual async Task<bool> Remove(int id)
         {
-            DbSet.Remove(DbSet.Find(id));
-            Db.SaveChanges();
+            var obj = await GetById(id);
+            if(obj == null) return false;
+
+            DbSet.Remove(obj);
+            return await Db.SaveChangesAsync() > 0;
         }
 
 
