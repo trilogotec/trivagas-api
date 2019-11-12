@@ -87,6 +87,7 @@ namespace TriVagas.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthorization();
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>

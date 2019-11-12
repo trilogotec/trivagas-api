@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TriVagas.Services.Interfaces;
 
@@ -18,6 +19,7 @@ namespace TriVagas.WebApi.Controllers
 
         [HttpGet]
         [Route("opportunity")]
+        [Authorize]
         public IActionResult Get()
         {
             try
