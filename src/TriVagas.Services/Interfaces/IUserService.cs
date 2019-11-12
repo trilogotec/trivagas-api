@@ -1,3 +1,4 @@
+using TriVagas.Domain.Models;
 using System;
 using System.Threading.Tasks;
 using TriVagas.Services.Requests;
@@ -10,5 +11,6 @@ namespace TriVagas.Services.Interfaces
         Task<UserRegisterResponse> Regiser(UserRegisterRequest user);
         Task<UserLoginResponse> Login(UserLoginRequest user);
         Task<bool> GetByEmail(UserRegisterRequest userRequest);
+        Task<User> GetById(int id);
     }
 }

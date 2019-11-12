@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO.Compression;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using TriVagas.Domain.Interfaces;
 using TriVagas.Infra.Data.Context;
-using TriVagas.Infra.Data.Repository;
-using TriVagas.Services.Interfaces;
-using TriVagas.Services.Services;
+using TriVagas.WebApi.Config;
 
 namespace TriVagas.WebApi
 {
@@ -36,9 +36,13 @@ namespace TriVagas.WebApi
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
 
-            // WebApi
-            // services.AddScoped<IServiceProvider, ServiceProvider>();
+            services.AddResponseCompression();
+                                    
+            services.AddSwaggerConfig();
+
+            services.ResolveFilterException();
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings").GetChildren().ToString());
             services.AddAuthentication(x =>
@@ -59,24 +63,26 @@ namespace TriVagas.WebApi
                 };
             });
 
-            // Infra.Data
-            services.AddScoped<IOpportunityRepository, OpportunityRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<DataContext, DataContext>();
+            services.ResolveDependencies();
 
-            // Services
-            services.AddScoped<IOpportunityService, OpportunityService>();
-            services.AddScoped<IUserService, UserService>();
-
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
+            app.UseResponseCompression();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("v1/swagger.json", "API Controle Volume V1");
+                });
             }
             else
             {
