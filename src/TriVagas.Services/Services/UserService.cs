@@ -36,7 +36,7 @@ namespace TriVagas.Services.Services
             var user = new User(userRequest.Email, userRequest.Password);
             var registeredUser = await _userRepository.Add(user);
             var tokenHandler = new JwtSecurityTokenHandler();
-            var secret = _config.GetSection("AppSettings").GetSection("Secret").Value;
+            var secret = "SECRET DA TRIVAGAS MAIS LONGO";
             var key = Encoding.ASCII.GetBytes(secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -56,7 +56,7 @@ namespace TriVagas.Services.Services
             var userLogin = await _userRepository.Login(user.Email, user.Password);
             if (userLogin == null) return null;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var secret = _config.GetSection("AppSettings").GetSection("Secret").Value;
+            var secret = "SECRET DA TRIVAGAS MAIS LONGO";
             var key = Encoding.ASCII.GetBytes(secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {

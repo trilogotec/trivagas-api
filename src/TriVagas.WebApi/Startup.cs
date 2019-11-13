@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +41,7 @@ namespace TriVagas.WebApi
             // WebApi
             // services.AddScoped<IServiceProvider, ServiceProvider>();
 
-            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings").GetChildren().ToString());
+            var key = Encoding.ASCII.GetBytes("SECRET DA TRIVAGAS MAIS LONGO");
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -68,7 +69,11 @@ namespace TriVagas.WebApi
             services.AddScoped<IOpportunityService, OpportunityService>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(
+                opt =>
+                    {
+                        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,8 +92,9 @@ namespace TriVagas.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseAuthorization();
+            
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
