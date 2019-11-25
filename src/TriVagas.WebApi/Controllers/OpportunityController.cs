@@ -22,7 +22,7 @@ namespace TriVagas.WebApi.Controllers
         {
             try
             {
-                return new ObjectResult(_opportunityService.GetAll());
+                return new ObjectResult(_opportunityService.GetAll().Result);
             }
             catch(Exception ex)
             {
