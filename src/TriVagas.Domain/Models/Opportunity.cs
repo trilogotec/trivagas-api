@@ -9,12 +9,10 @@ namespace TriVagas.Domain.Models
         public Opportunity(string title,
                            Company company, 
                            Class _class, 
-                           List<Skill> skills, 
                            string description,
                            EJobType jobType,
                            decimal salaryMin,
                            decimal salaryMax,
-                           Job job,
                            User user)
         {
             LastUpdate = DateTime.Now;
@@ -26,7 +24,6 @@ namespace TriVagas.Domain.Models
             CompanyId = company.Id;
             Class = _class;
             ClassId = _class.Id;
-            Skills = skills;
             Description = description;
             JobType = jobType;
             SalaryMin = salaryMin;
