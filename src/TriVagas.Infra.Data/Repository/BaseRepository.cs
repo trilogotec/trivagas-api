@@ -46,7 +46,7 @@ namespace TriVagas.Infra.Data.Repository
         public virtual async Task<bool> Remove(int id)
         {
             var obj = await GetById(id);
-            if(obj == null) return false;
+            if (obj == null) return false;
 
             DbSet.Remove(obj);
             return await Db.SaveChangesAsync() > 0;

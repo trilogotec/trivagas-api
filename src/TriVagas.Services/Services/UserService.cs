@@ -17,67 +17,30 @@ namespace TriVagas.Services.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IHostEnvironment _env;
-        private readonly IConfigurationRoot _config;
-        public UserService(IUserRepository userRepository, IHostEnvironment env)
+        private readonly IJWTService _jwtService;
+
+        public UserService(IUserRepository userRepository, IJWTService jwtService)
         {
             _userRepository = userRepository;
-            _env = env;
-
-            _config = new ConfigurationBuilder()
-                .SetBasePath(_env.ContentRootPath)
-                .AddJsonFile($"appsettings.{_env.EnvironmentName}.json")
-                .Build();
+            _jwtService = jwtService;
         }
 
         public async Task<User> GetById(int id) 
         {
             return await _userRepository.GetById(id);
         } 
+
         public async Task<UserRegisterResponse> Regiser(UserRegisterRequest userRequest)
         {
             var user = new User(userRequest.Email, userRequest.Password);
             var registeredUser = await _userRepository.Add(user);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var secret = _config.GetSection("AppSettings").GetSection("Secret").Value;
-            var key = Encoding.ASCII.GetBytes(secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[] 
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var userToken = tokenHandler.WriteToken(token);
-            return new UserRegisterResponse {Email = registeredUser.Email, Token = userToken};
-        }
-        public async Task<UserLoginResponse> Login(UserLoginRequest user)
-        {
-            var userLogin = await _userRepository.Login(user.Email, user.Password);
-            if (userLogin == null) return null;
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var secret = _config.GetSection("AppSettings").GetSection("Secret").Value;
-            var key = Encoding.ASCII.GetBytes(secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[] 
-                {
-                    new Claim(ClaimTypes.Name, userLogin.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var userToken = tokenHandler.WriteToken(token);
-            return new UserLoginResponse {Email = userLogin.Email, Token = userToken};
+            var jwtTokenString = _jwtService.GenerateToken(registeredUser);
+            return new UserRegisterResponse {Email = registeredUser.Email, Token = jwtTokenString };
         }
 
-        public async Task<bool> GetByEmail(UserRegisterRequest userRequest)
+        public async Task<User> GetByEmail(string email)
         {
-            return await _userRepository.GetByEmail(userRequest.Email) != null;
+            return await _userRepository.GetByEmail(email);
         }
 
         public void Dispose()

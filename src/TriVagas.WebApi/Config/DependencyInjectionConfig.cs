@@ -14,11 +14,14 @@ namespace TriVagas.WebApi.Config
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             // Infra.Data
-            services.AddScoped<IOpportunityRepository, OpportunityRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IClassRepository, ClassRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<ICompanyUserRepository, CompanyUserRepository>();
+            services.AddScoped<IOpportunityRepository, OpportunityRepository>();
             services.AddScoped<IPageOwnerRepository, PageOwnerRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<List<Notification>>();
@@ -26,10 +29,13 @@ namespace TriVagas.WebApi.Config
             services.AddScoped<DataContext, DataContext>();
 
             // Services
+            services.AddScoped<IClassService, ClassService>();
             services.AddScoped<ICompanyService, CompanyService>();
-            services.AddScoped<IPageServer, PageServer>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<IOpportunityService, OpportunityService>();
+            services.AddScoped<IPageServer, PageServer>();
+            services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

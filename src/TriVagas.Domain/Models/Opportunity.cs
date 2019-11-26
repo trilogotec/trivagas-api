@@ -6,7 +6,8 @@ namespace TriVagas.Domain.Models
 {
     public class Opportunity : BaseEntity
     {
-        public Opportunity(Company company, 
+        public Opportunity(string title,
+                           Company company, 
                            Class _class, 
                            List<Skill> skills, 
                            string description,
@@ -14,13 +15,13 @@ namespace TriVagas.Domain.Models
                            decimal salaryMin,
                            decimal salaryMax,
                            Job job,
-                           List<Like> likes,
                            User user)
         {
             LastUpdate = DateTime.Now;
             LastUpdateBy = user;
             CreationDate = DateTime.Now;
             CreatedBy = user;
+            Title = title;
             Company = company;
             CompanyId = company.Id;
             Class = _class;
@@ -31,12 +32,12 @@ namespace TriVagas.Domain.Models
             SalaryMin = salaryMin;
             SalaryMax = salaryMax;
             Active = true;
-            Job = job;
-            Likes = likes;
         }
 
         // Empty constructor for EF.
         protected Opportunity(){}
+
+        public string Title { get; protected set; }
         public Company Company { get; protected set; }
         public int CompanyId { get; protected set; }
         public Class Class { get; protected set; }
