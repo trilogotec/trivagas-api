@@ -19,7 +19,7 @@ namespace TriVagas.Infra.Data.Repository
 
         public async Task<User> GetByEmail(string email)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
+            return await DbSet.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

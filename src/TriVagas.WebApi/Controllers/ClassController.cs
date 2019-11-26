@@ -1,6 +1,8 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TriVagas.Services.Interfaces;
 using TriVagas.Services.Notify;
@@ -9,37 +11,27 @@ using TriVagas.WebApi.Filters;
 
 namespace TriVagas.WebApi.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/{controller}")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class OpportunityController : ApiController
+    public class ClassController : ApiController
     {
-        private readonly IOpportunityService _opportunityService;
-        private readonly IUserService _userService;
+        private readonly IClassService _classService;
         private readonly IJWTService _jwtService;
+        private readonly IUserService _userService;
 
-        public OpportunityController(
-            IOpportunityService opportunityService,
+        public ClassController(IClassService classService,
             IUserService userService,
-            IJWTService jwtService,
-            INotify notify) : base(notify)
+            INotify notify,
+            IJWTService jwtService) : base(notify)
         {
-            _opportunityService = opportunityService;
+            _classService = classService;
             _userService = userService;
             _jwtService = jwtService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var opportunities = await _opportunityService.GetAll();
-
-            return Response(opportunities);
-        }
-
         [TypeFilter(typeof(JWTokenAuthFilter))]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateOpportunityRequest opportunity)
+        public async Task<IActionResult> Create([FromBody] CreateClassRequest request)
         {
             var claims = _jwtService.GetTokenClaims(Request.Headers["JWToken"]);
             var email = claims.First().Value;
@@ -50,17 +42,16 @@ namespace TriVagas.WebApi.Controllers
                 return Response(code: 404);
             }
 
-            var createdOpportunity = await _opportunityService.Register(opportunity, user);
+            var createdClass = await _classService.Register(request, user);
 
-            if (createdOpportunity != null)
+            if (createdClass != null)
             {
-                return Response(createdOpportunity, 201);
+                return Response(createdClass, 201);
             }
             else
             {
                 return Response(code: 400);
             }
         }
-
     }
 }

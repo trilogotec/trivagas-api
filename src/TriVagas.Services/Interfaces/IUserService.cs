@@ -9,8 +9,7 @@ namespace TriVagas.Services.Interfaces
     public interface IUserService : IDisposable
     {
         Task<UserRegisterResponse> Regiser(UserRegisterRequest user);
-        Task<UserLoginResponse> Login(UserLoginRequest user);
-        Task<bool> GetByEmail(UserRegisterRequest userRequest);
+        Task<User> GetByEmail(string email);
         Task<User> GetById(int id);
     }
 }

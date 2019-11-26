@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TriVagas.Domain.Models;
+using TriVagas.Services.Requests;
+using TriVagas.Services.Responses;
 
 namespace TriVagas.Services.Interfaces
 {
@@ -9,8 +11,8 @@ namespace TriVagas.Services.Interfaces
     {
         Task<List<Opportunity>> GetAll();
         Task<Opportunity> GetById(int id);
-        Task<Opportunity> Register(Opportunity opportunity);
-        Task<Opportunity> Update(Opportunity opportunity);
+        Task<OpportunityResponse> Register(CreateOpportunityRequest opportunity, User user);
+        Task<Opportunity> Update(Opportunity opportunity, User user);
         Task<bool> Remove(int id);
     }
 }

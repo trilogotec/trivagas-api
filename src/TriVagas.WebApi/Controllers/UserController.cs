@@ -19,19 +19,9 @@ namespace TriVagas.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
-        {
-            var loggedUser = await _userService.Login(user);
-            if(loggedUser == null) return BadRequest("E-mail ou senha inválidos");
-            return Ok(loggedUser);
-        }
-
-        [HttpPost]
-        [Route("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest userRequest)
         {
-            if (await _userService.GetByEmail(userRequest))
+            if (await _userService.GetByEmail(userRequest.Email) != null)
             {
                 return BadRequest("E-Mail já registrado");
             }
