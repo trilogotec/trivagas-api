@@ -65,6 +65,8 @@ namespace TriVagas.WebApi
 
             services.ResolveDependencies();
 
+            services.AddScoped<IServiceProvider, ServiceProvider>();
+
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true); ;
         }
