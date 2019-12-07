@@ -44,6 +44,8 @@ namespace TriVagas.WebApi
 
             services.ResolveFilterException();
 
+            services.AddAutoMapperSetup();
+
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings").GetChildren().ToString());
             services.AddAuthentication(x =>
             {

@@ -269,11 +269,11 @@ namespace TriVagas.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("SalaryMax")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<decimal>("SalaryMax")
+                        .HasColumnType("decimal(10,2)");
 
-                    b.Property<decimal?>("SalaryMin")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<decimal>("SalaryMin")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
