@@ -1,6 +1,5 @@
 using TriVagas.Domain.Models;
 using System.Threading.Tasks;
-using TriVagas.Domain.Models;
 
 namespace TriVagas.Domain.Interfaces
 {
@@ -8,5 +7,6 @@ namespace TriVagas.Domain.Interfaces
     {
         Task<User> GetUserByCredentials(string email, string password);
         Task<User> GetByEmail(string email);
-    }
+        Task<User> Login(string email, string password);
+  }
 }

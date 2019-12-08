@@ -9,10 +9,10 @@ namespace TriVagas.Services.Interfaces
 {
     public interface IOpportunityService : IDisposable
     {
-        Task<List<Opportunity>> GetAll();
-        Task<Opportunity> GetById(int id);
-        Task<OpportunityResponse> Register(CreateOpportunityRequest opportunity, User user);
-        Task<Opportunity> Update(Opportunity opportunity, User user);
+        Task<List<OpportunityResponse>> GetAll();
+        Task<OpportunityResponse> GetById(int id);
+        Task<OpportunityResponse> Register(CreateOpportunityRequest opportunity);
+        Task<OpportunityResponse> Update(UpdateOpportunityRequest opportunity);
         Task<bool> Remove(int id);
     }
 }
