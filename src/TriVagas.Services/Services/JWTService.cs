@@ -37,7 +37,8 @@ namespace TriVagas.Services.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("email", user.Email)
+                    new Claim("email", user.Email),
+                    new Claim("user_id",user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256)

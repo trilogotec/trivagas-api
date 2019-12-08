@@ -43,6 +43,11 @@ namespace TriVagas.Services.Services
             return await _userRepository.GetByEmail(email);
         }
 
+        public async Task<User> GetUserByCredentials(string email, string password)
+        {
+            return await _userRepository.GetUserByCredentials(email, password);
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

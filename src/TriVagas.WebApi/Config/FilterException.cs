@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
+using TriVagas.Services.Exceptions;
 
 namespace TriVagas.WebApi.Config
 {
@@ -8,10 +9,18 @@ namespace TriVagas.WebApi.Config
     {
         public void OnException(ExceptionContext context)
         {
+            var exception = context.Exception;
+            int status = 500;
+
+            if (exception.GetType() == typeof(AuthenticationException))
+            {
+                status = 400; 
+            }
+
             context.Result = new ObjectResult(new {
                 success = false,
                 message = context.Exception.Message
-            }) { StatusCode = 500 };
+            }) { StatusCode = status };
         }
     }
 
