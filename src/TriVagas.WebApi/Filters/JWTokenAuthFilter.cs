@@ -24,8 +24,20 @@ namespace TriVagas.WebApi.Filters
       {
         if (!_jwtService.IsTokenValid(token))
         {
-          context.Result = new HttpForbiddenResult();
-          return;
+            var token = context.HttpContext.Request.Headers["JWToken"];
+            try
+            {
+                if (!_jwtService.IsTokenValid(token))
+                {
+                    context.Result = new HttpForbiddenResult();
+                    return;
+                }
+            }
+            catch
+            {
+                context.Result = new HttpForbiddenResult();
+                return;
+            }
         }
       }
       catch
