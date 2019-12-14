@@ -1,28 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Linq;
 using TriVagas.Services.Interfaces;
 using TriVagas.WebApi.HttpResults;
 
 namespace TriVagas.WebApi.Filters
 {
-  public class JWTokenAuthFilter : IAuthorizationFilter
-  {
-    private readonly IJWTService _jwtService;
-    private readonly IUserService _userService;
-
-    public JWTokenAuthFilter(IJWTService jwtService, IUserService userService)
+    public class JWTokenAuthFilter : IAuthorizationFilter
     {
-      _jwtService = jwtService;
-      _userService = userService;
-    }
+        private readonly IJWTService _jwtService;
+        public JWTokenAuthFilter(IJWTService jwtService)
+        {
+            _jwtService = jwtService;
+        }
 
-    public void OnAuthorization(AuthorizationFilterContext context)
-    {
-      var token = context.HttpContext.Request.Headers["JWToken"];
-      try
-      {
-        if (!_jwtService.IsTokenValid(token))
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
             var token = context.HttpContext.Request.Headers["JWToken"];
             try
@@ -33,18 +24,11 @@ namespace TriVagas.WebApi.Filters
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 context.Result = new HttpForbiddenResult();
                 return;
             }
         }
-      }
-      catch
-      {
-        context.Result = new HttpForbiddenResult();
-        return;
-      }
     }
-  }
 }
