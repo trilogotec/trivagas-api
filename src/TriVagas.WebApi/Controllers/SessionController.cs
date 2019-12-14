@@ -6,6 +6,7 @@ using TriVagas.Services.Interfaces;
 using System.Threading.Tasks;
 using TriVagas.Services.Responses;
 using TriVagas.Services.Notify;
+using TriVagas.WebApi.Config;
 
 namespace TriVagas.WebApi.Controllers
 {
@@ -14,17 +15,19 @@ namespace TriVagas.WebApi.Controllers
     [ApiController]
     public class SessionController : ApiController
     {
-        private readonly ISessionService _sessionService;
-        public SessionController(ISessionService sessionService, INotify _notify) : base(_notify)
+        //private readonly ISessionService _sessionService;
+        private readonly Authentication _authentication;
+
+        public SessionController(Authentication authentication, INotify _notify) : base(_notify)
         {
-            _sessionService = sessionService;
+            //_sessionService = sessionService;
+            _authentication = authentication;
         }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
         {
-            var loggedUser = await _sessionService.Login(user);
-            if (loggedUser == null) return BadRequest("E-mail ou senha inválidos");
+            var loggedUser = await _authentication.Login(user);
 
             return Response(loggedUser, 200);
         }

@@ -10,6 +10,7 @@ namespace TriVagas.Services.Interfaces
     {
         Task<UserRegisterResponse> Regiser(UserRegisterRequest user);
         Task<User> GetByEmail(string email);
+        Task<User> GetUserByCredentials(string email, string password);
         Task<User> GetById(int id);
     }
 }

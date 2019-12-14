@@ -7,23 +7,21 @@ namespace TriVagas.Domain.Models
     public class Opportunity : BaseEntity
     {
         public Opportunity(string title,
-                           Company company, 
-                           Class _class, 
+                           int companyId, 
+                           int _classId, 
                            string description,
                            EJobType jobType,
                            decimal salaryMin,
                            decimal salaryMax,
-                           User user)
+                           int userId)
         {
             LastUpdate = DateTime.Now;
-            LastUpdateBy = user;
+            LastUpdateById = userId;
             CreationDate = DateTime.Now;
-            CreatedBy = user;
+            CreatedById = userId;
             Title = title;
-            Company = company;
-            CompanyId = company.Id;
-            Class = _class;
-            ClassId = _class.Id;
+            CompanyId = companyId;
+            ClassId = _classId;
             Description = description;
             JobType = jobType;
             SalaryMin = salaryMin;
@@ -42,8 +40,8 @@ namespace TriVagas.Domain.Models
         public List<Skill> Skills { get; protected set; }
         public string Description { get; protected set; }
         public EJobType JobType { get; protected set; }
-        public decimal? SalaryMin { get; protected set; }
-        public decimal? SalaryMax { get; protected set; }
+        public decimal SalaryMin { get; protected set; }
+        public decimal SalaryMax { get; protected set; }
         public bool Active { get; protected set; }
         public Job Job { get; protected set; }
         public List<Like> Likes { get; protected set; }

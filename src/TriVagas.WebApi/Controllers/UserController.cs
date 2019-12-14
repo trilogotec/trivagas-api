@@ -13,9 +13,9 @@ namespace TriVagas.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        public UserController(IServiceProvider serviceProvider)
         {
-            _userService = userService;
+            _userService = serviceProvider.GetRequiredService<IUserService>();
         }
 
         [HttpPost]

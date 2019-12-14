@@ -10,7 +10,10 @@ namespace TriVagas.Infra.Data.Mapping
         {
             builder.ToTable("Opportunities");
 
-            builder.HasKey(o => o.Id);           
+            builder.HasKey(o => o.Id);
+
+            //builder.Property(o => o.SalaryMax).HasColumnType("decimal(10,2)");
+            //builder.Property(o => o.SalaryMin).HasColumnType("decimal(10,2)");
 
             builder.HasOne(o => o.Company)
                    .WithMany(c => c.Opportunities)

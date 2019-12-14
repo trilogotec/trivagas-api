@@ -15,18 +15,12 @@ namespace TriVagas.WebApi.Controllers
     public class OpportunityController : ApiController
     {
         private readonly IOpportunityService _opportunityService;
-        private readonly IUserService _userService;
-        private readonly IJWTService _jwtService;
 
         public OpportunityController(
             IOpportunityService opportunityService,
-            IUserService userService,
-            IJWTService jwtService,
             INotify notify) : base(notify)
         {
             _opportunityService = opportunityService;
-            _userService = userService;
-            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -37,20 +31,26 @@ namespace TriVagas.WebApi.Controllers
             return Response(opportunities);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var opportunity = await _opportunityService.GetById(id);
+            if (opportunity != null)
+            {
+                return Response(opportunity, 200);
+            }
+            else
+            {
+                return Response(code: 404);
+            }
+        }
+
         [TypeFilter(typeof(JWTokenAuthFilter))]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateOpportunityRequest opportunity)
         {
-            var claims = _jwtService.GetTokenClaims(Request.Headers["JWToken"]);
-            var email = claims.First().Value;
-            var user = await _userService.GetByEmail(email);
-
-            if (user == null)
-            {
-                return Response(code: 404);
-            }
-
-            var createdOpportunity = await _opportunityService.Register(opportunity, user);
+            var createdOpportunity = await _opportunityService.Register(opportunity);
 
             if (createdOpportunity != null)
             {
@@ -62,5 +62,37 @@ namespace TriVagas.WebApi.Controllers
             }
         }
 
+        [TypeFilter(typeof(JWTokenAuthFilter))]
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromBody] UpdateOpportunityRequest opportunity, int id)
+        {
+            opportunity.id = id;
+            var updatedOpportunity = await _opportunityService.Update(opportunity);
+
+            if (updatedOpportunity != null)
+            {
+                return Response(updatedOpportunity, 200);
+            }
+            else
+            {
+                return Response(code: 400);
+            }
+        }
+
+        [TypeFilter(typeof(JWTokenAuthFilter))]
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            if (await _opportunityService.Remove(id))
+            {
+                return Response(code: 200);
+            }
+            else
+            {
+                return Response(code: 400);
+            }
+        }
     }
 }
