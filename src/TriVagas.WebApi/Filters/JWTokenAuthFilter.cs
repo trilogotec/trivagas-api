@@ -24,7 +24,7 @@ namespace TriVagas.WebApi.Filters
                     return;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 context.Result = new HttpForbiddenResult();
                 return;

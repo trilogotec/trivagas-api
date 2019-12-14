@@ -18,7 +18,6 @@ namespace TriVagas.WebApi
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         public Startup(IHostEnvironment env)
