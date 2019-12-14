@@ -12,20 +12,18 @@ namespace TriVagas.Infra.Data.Repository
     {
     }
     public async Task<User> Login(string email, string password)
-    {
-        public UserRepository(DataContext context) : base(context)
-        {
-        }
-        public async Task<User> GetUserByCredentials(string email, string password)
-        {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-        }
+    {       
       return await DbSet.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
     }
 
     public async Task<User> GetByEmail(string email)
     {
       return await DbSet.FirstOrDefaultAsync(u => u.Email == email);
+    }
+ 
+    public async Task<User> GetUserByCredentials(string email, string password)
+    {
+      return await DbSet.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
     }
   }
 }
